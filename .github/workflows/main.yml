@@ -7,13 +7,13 @@ jobs:
     steps:
       - name: Crear entornos
         env:
-          GITHUB_TOKEN: ${{ secrets.CALLAITO }}
+          GITHUB_TOKEN: ${{ secrets.CALLAITOSTODOS }}
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.repository }}
         run: |
           curl -X POST \
             https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer ${CALLAITO}' \
+            -H 'Authorization: Bearer ${CALLAITOSTODOS}' \
             -H 'Content-Type: application/json' \
             -d '{
               "name": "Desarrollo",
@@ -22,7 +22,7 @@ jobs:
 
           curl -X POST \
             https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer ${CALLAITO}' \
+            -H 'Authorization: Bearer ${CALLAITOSTODOS}' \
             -H 'Content-Type: application/json' \
             -d '{
               "name": "Preproducción",
@@ -31,7 +31,7 @@ jobs:
 
           curl -X POST \
             https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer ${CALLAITO}' \
+            -H 'Authorization: Bearer ${CALLAITOSTODOS}' \
             -H 'Content-Type: application/json' \
             -d '{
               "name": "Producción",
