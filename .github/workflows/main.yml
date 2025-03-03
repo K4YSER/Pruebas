@@ -12,7 +12,7 @@ jobs:
         run: |
           curl -X POST \
             https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer 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' \
+            -H 'Authorization: Bearer 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' \
             -H 'Content-Type: application/json' \
             -d '{
               "name": "Desarrollo",
@@ -21,7 +21,7 @@ jobs:
 
           curl -X POST \
             https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer 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' \
+            -H 'Authorization: Bearer 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' \
             -H 'Content-Type: application/json' \
             -d '{
               "name": "Preproducción",
@@ -30,7 +30,7 @@ jobs:
 
           curl -X POST \
             https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer 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' \
+            -H 'Authorization: Bearer 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' \
             -H 'Content-Type: application/json' \
             -d '{
               "name": "Producción",
