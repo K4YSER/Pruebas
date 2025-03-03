@@ -1,4 +1,4 @@
-name: Obtener usuario que ejecutó el push
+name: Obtener usuario y hora que ejecutó el push
 
 on:
   push:
@@ -6,9 +6,10 @@ on:
       - main
 
 jobs:
-  obtener-usuario:
+  obtener-usuario-y-hora:
     runs-on: ubuntu-latest
     steps:
-      - name: Obtener usuario
+      - name: Obtener usuario y hora
         run: |
           echo "El usuario que ejecutó el push es: $GITHUB_ACTOR"
+          echo "La hora en que se ejecutó el push es: $(date +'%Y-%m-%d %H:%M:%S')"
