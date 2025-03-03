@@ -1,0 +1,15 @@
+name: Instalar Ubuntu 20.04
+
+on:
+  workflow_dispatch:
+
+jobs:
+  instalar-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar Ubuntu 20.04
+        run: |
+          sudo apt update
+          sudo apt install -y ubuntu-desktop
+          echo "Ubuntu 20.04 instalado correctamente"
+          echo "Versión de Ubuntu instalada: $(lsb_release -a | grep 'Description' | cut -d ':' -f2-)"
