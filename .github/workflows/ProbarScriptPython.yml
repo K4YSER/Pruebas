@@ -32,7 +32,7 @@ jobs:
           cat ./resultados.txt
       
       - name: Subir archivo resultados.txt
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: resultados.txt
           path: ./resultados.txt
