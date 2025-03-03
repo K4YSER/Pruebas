@@ -1,0 +1,26 @@
+name: Probar script de Python en Ubuntu
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  probar-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+
+      - name: Ejecutar script de Python
+        run: |
+          python tu_script.py
+
+      - name: Mostrar resultados
+        run: |
+          echo "Resultados de la ejecución:"
+          cat resultados.txt
