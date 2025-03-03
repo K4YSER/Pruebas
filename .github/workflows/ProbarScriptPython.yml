@@ -18,9 +18,9 @@ jobs:
 
       - name: Ejecutar script de Python
         run: |
-          python tu_script.py
+          python ./Script.py > ./resultados.txt
 
       - name: Mostrar resultados
         run: |
           echo "Resultados de la ejecución:"
-          cat resultados.txt
+          cat ./resultados.txt
