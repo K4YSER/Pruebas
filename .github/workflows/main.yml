@@ -1,0 +1,38 @@
+name: Crear entornos
+on: [push]
+jobs:
+  crear-entornos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crear entornos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.repository }}
+        run: |
+          curl -X POST \
+            https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
+            -H 'Authorization: Bearer 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' \
+            -H 'Content-Type: application/json' \
+            -d '{
+              "name": "Desarrollo",
+              "description": "Entorno de desarrollo"
+            }'
+
+          curl -X POST \
+            https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
+            -H 'Authorization: Bearer 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' \
+            -H 'Content-Type: application/json' \
+            -d '{
+              "name": "Preproducción",
+              "description": "Entorno de preproducción"
+            }'
+
+          curl -X POST \
+            https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
+            -H 'Authorization: Bearer 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' \
+            -H 'Content-Type: application/json' \
+            -d '{
+              "name": "Producción",
+              "description": "Entorno de producción"
+            }'
