@@ -12,9 +12,15 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v4
 
+      - name: Crear archivo requirements.txt
+        run: |
+          echo "numpy" > ./requirements.txt
+          echo "pandas" >> ./requirements.txt
+          echo "matplotlib" >> ./requirements.txt
+      
       - name: Instalar dependencias
         run: |
-          pip install -r requirements.txt
+          pip install -r ./requirements.txt
 
       - name: Ejecutar script de Python
         run: |
