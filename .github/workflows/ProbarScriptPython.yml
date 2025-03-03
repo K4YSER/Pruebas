@@ -21,10 +21,16 @@ jobs:
       - name: Instalar dependencias
         run: |
           pip install -r ./requirements.txt
-
+      
       - name: Ejecutar script de Python
         run: |
           python ./Script.py > ./resultados.txt
+      
+      - name: Subir archivo resultados.txt
+        uses: actions/upload-artifact@v2
+        with:
+          name: resultados.txt
+          path: ./resultados.txt
 
       - name: Mostrar resultados
         run: |
