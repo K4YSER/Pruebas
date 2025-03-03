@@ -26,13 +26,13 @@ jobs:
         run: |
           python ./Script.py > ./resultados.txt
       
+      - name: Mostrar resultados
+        run: |
+          echo "Resultados de la ejecución:"
+          cat ./resultados.txt
+      
       - name: Subir archivo resultados.txt
         uses: actions/upload-artifact@v2
         with:
           name: resultados.txt
           path: ./resultados.txt
-
-      - name: Mostrar resultados
-        run: |
-          echo "Resultados de la ejecución:"
-          cat ./resultados.txt
