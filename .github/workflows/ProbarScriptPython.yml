@@ -32,7 +32,10 @@ jobs:
           cat ./resultados.txt
       
       - name: Subir archivo resultados.txt
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: resultados.txt
           path: ./resultados.txt
+          retentionDays: 30
+          if-no-files-found: error
+
