@@ -1,0 +1,14 @@
+name: Obtener usuario que ejecutó el push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  obtener-usuario:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener usuario
+        run: |
+          echo "El usuario que ejecutó el push es: $GITHUB_ACTOR"
