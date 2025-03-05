@@ -1,39 +1,47 @@
+name: Migrar proyecto de Jenkins a GitHub
 
-name: Crear entornos
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      # Informacion necesaria para acceder al Servidor
+      jenkins_url: { description: 'URL del servidor de Jenkins' }
+      jenkins_credentials: { description: 'usuario:contraseña' }
+      github_token: { description: 'Token de acceso a GitHub' }
+      proyecto_nombre: { description: 'Nombre del proyecto a migrar' }
+
 jobs:
-  crear-entornos:
+  migrar_proyecto:
     runs-on: ubuntu-latest
     steps:
-      - name: Crear entornos
-        env:
-          GITHUB_TOKEN: ${{ secrets.CALLAITOSTODOS }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.repository }}
+      - name: Checkout del código
+        uses: actions/checkout@v2
+
+      - name: Instalar dependencias
         run: |
-          curl -X POST \
-            https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer ${CALLAITOSTODOS}' \
-            -H 'Content-Type: application/json' \
-            -d '{
-              "name": "Desarrollo",
-              "description": "Entorno de desarrollo"
-            }'
+          pip install python-jenkins
 
-          curl -X POST \
-            https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer ${CALLAITOSTODOS}' \
-            -H 'Content-Type: application/json' \
-            -d '{
-              "name": "Preproducción",
-              "description": "Entorno de preproducción"
-            }'
+      - name: Conectar con Jenkins
+        env:
+          JENKINS_URL: ${{ inputs.jenkins_url }}
+          JENKINS_CREDENTIALS: ${{ inputs.jenkins_credentials }}
+        run: |
+          python -c "import jenkins; j = jenkins.Jenkins('$JENKINS_URL', username='usuario', password='contraseña'); print(j.get_job_info('$proyecto_nombre'))"
 
-          curl -X POST \
-            https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/environments \
-            -H 'Authorization: Bearer ${CALLAITOSTODOS}' \
-            -H 'Content-Type: application/json' \
-            -d '{
-              "name": "Producción",
-              "description": "Entorno de producción"
-            }'
+      - name: Descargar código del proyecto
+        env:
+          PROYECTO_NOMBRE: ${{ inputs.proyecto_nombre }}
+        run: |
+          python -c "import jenkins; j = jenkins.Jenkins('$JENKINS_URL', username='usuario', password='contraseña'); job_info = j.get_job_info('$PROYECTO_NOMBRE'); print(job_info['lastSuccessfulBuild']['number'])"
+
+      - name: Subir código a GitHub
+        env:
+          GITHUB_TOKEN: ${{ inputs.github_token }}
+          PROYECTO_NOMBRE: ${{ inputs.proyecto_nombre }}
+        run: |
+          git config --global user.name "Tu nombre"
+          git config --global user.email "tu@email.com"
+          git add .
+          git commit -m "Migración del proyecto $PROYECTO_NOMBRE desde Jenkins"
+          git push https://$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+
+
