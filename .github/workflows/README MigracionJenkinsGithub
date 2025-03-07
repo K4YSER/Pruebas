@@ -1,0 +1,10 @@
+##### Ejemplo para lanzar esta GH Action de Migracion #####
+
+URL del servidor de Jenkins:
+https://www.jenkins.io/
+
+Credenciales de Jenkins:
+usuario:password
+
+Nombre del proyecto a migrar:
+Pruebas
