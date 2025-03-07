@@ -22,11 +22,11 @@ jobs:
         run: |
           pylint --output-format=text --output=report.txt .
       - name: Crear artefacto
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: report
           path: report.txt
-          
+
       - name: Enviar correo electrónico
         if: failure()
         env:
