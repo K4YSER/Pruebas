@@ -19,14 +19,16 @@ jobs:
           pip install pylint
           
       - name: Analizar código
+        env:
+          GITHUB_TOKEN: ${{ secrets.TokenDePruebas }}
         run: |
           pylint --output-format=text --output=report.txt .
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add report.txt
           git commit -m "Agregar reporte de análisis de código"
-          git push origin main
-          
+          git push origin main --force
+
       - name: Enviar correo electrónico
         if: failure()
         env:
