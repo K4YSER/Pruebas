@@ -1,4 +1,3 @@
-
 name: Instalar VS Code en Linux
 
 on:
@@ -25,6 +24,7 @@ jobs:
       - name: Instalar VS Code
         run: |
           sudo snap install code --classic
+          mkdir -p /home/runner/.config/Code
           sudo chown -R $USER:$USER /home/runner/.config/Code
 
       - name: Verificar instalación de VS Code
