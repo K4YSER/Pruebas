@@ -21,8 +21,9 @@ jobs:
       - name: Analizar código
         run: |
           pylint --output-format=text --output=report.txt .
+          
       - name: Crear artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact
         with:
           name: report
           path: report.txt
