@@ -21,6 +21,17 @@ jobs:
       - name: Analizar código
         run: |
           pylint --output-format=text --output=report.txt .
+          if [ -s report.txt ]; then
+            echo "Se encontraron errores en el código" >> report.txt
+          else
+            echo "Código Analizado, todo OK" > report.txt
+          fi
+      - name: Crear artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: report.txt
+
           
       - name: Crear artefacto
         uses: actions/upload-artifact@v4
