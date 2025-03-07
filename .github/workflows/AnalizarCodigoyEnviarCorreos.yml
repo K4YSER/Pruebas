@@ -13,12 +13,20 @@ jobs:
     steps:
       - name: Checkout del código
         uses: actions/checkout@v3
+        
       - name: Instalar dependencias
         run: |
           pip install pylint
+          
       - name: Analizar código
         run: |
           pylint --output-format=text --output=report.txt .
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add report.txt
+          git commit -m "Agregar reporte de análisis de código"
+          git push origin main
+          
       - name: Enviar correo electrónico
         if: failure()
         env:
