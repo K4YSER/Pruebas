@@ -18,7 +18,7 @@ jobs:
           pip install pylint
       - name: Analizar código
         run: |
-          pylint --output-format=html --output=report.html .
+          pylint --output-format=html5 --output=report.html .
       - name: Enviar correo electrónico
         if: failure()
         env:
