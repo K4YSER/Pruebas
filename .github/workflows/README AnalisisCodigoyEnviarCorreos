@@ -1,0 +1,6 @@
+Esta GH Action se ejecuta cuando se lanza un commit en la rama main , y su función es:
+
+- Analiza el código del proyecto
+- Manda un correo desde el mail de un remitente a los destinatarios indicados en el código
+
+* Tanto el Remitente, Destinatarios, Asunto y Cuerpo del correo se pueden editar y cambiarlos en el propio código
