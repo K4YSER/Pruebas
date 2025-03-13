@@ -24,4 +24,4 @@ jobs:
           
       - name: Ejecutar código Python
         run: |
-          python tu_archivo.py
+          python python.py
