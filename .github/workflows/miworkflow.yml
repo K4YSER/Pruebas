@@ -10,7 +10,7 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v2
       - name: Ejecuta mi acción
-        uses: ./mi-action
+        uses: ./.github/workflows/mi-action
         with:
           parametro1: 'valor1'
           parametro2: 'valor2'
