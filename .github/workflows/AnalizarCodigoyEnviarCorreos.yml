@@ -8,12 +8,12 @@ jobs:
   analisis:
     runs-on: ubuntu-latest
     steps:
-      -- name: Checkout del código
-         uses: actions/checkout@v3
-      -- name: Instalar dependencias
+      - name: Checkout del código
+        uses: actions/checkout@v3
+      - name: Instalar dependencias
         run: |
           pip install pylint
-      -- name: Analizar código
+      - name: Analizar código
         run: |
           pylint --output-format=text --output=report.txt .
           if [ -s report.txt ]; then
@@ -21,12 +21,12 @@ jobs:
           else
             echo "Código Analizado, todo OK" > report.txt
           fi
-      -- name: Crear artefacto
+      - name: Crear artefacto
         uses: actions/upload-artifact@v4
         with:
           name: report
           path: report.txt
-      -- name: Enviar correo electrónico
+      - name: Enviar correo electrónico
         if: failure()
         env:
         ##### CAMBIAR 'Se ha detectado un error en el código' por el mensaje que quieres que salga en el correo #####
