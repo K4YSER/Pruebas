@@ -1,0 +1,15 @@
+name: 'Mi Action en Python'
+description: 'Una acción en Python que hace algo útil'
+inputs:
+  parametro1:
+    description: 'Un parámetro de entrada'
+    required: true
+  parametro2:
+    description: 'Otro parámetro de entrada'
+    required: false
+outputs:
+  resultado:
+    description: 'El resultado de la acción'
+runs:
+  using: 'python'
+  main: 'main.py'
