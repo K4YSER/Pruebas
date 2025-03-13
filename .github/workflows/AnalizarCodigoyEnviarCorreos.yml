@@ -3,7 +3,7 @@ on:
   push:
     branches:
     ##### RAMAS DONDE SE EJECUTARÁ LA GH ACTION #####
-      -- main
+      - main
 jobs:
   analisis:
     runs-on: ubuntu-latest
