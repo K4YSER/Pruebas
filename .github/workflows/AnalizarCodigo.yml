@@ -24,4 +24,4 @@ jobs:
           
       - name: Ejecutar código Python
         run: |
-          python python.py
+          find . -name "*.py" -exec python {} \;
