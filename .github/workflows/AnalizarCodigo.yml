@@ -4,6 +4,9 @@ on:
       repo:
         description: 'Repositorio a analizar'
         required: true
+      token:
+        description: 'Token de acceso'
+        required: true
       branch:
         description: 'Rama del repositorio a analizar'
         required: true
@@ -16,5 +19,5 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ github.event.inputs.repo }}
-          token: ${{ secrets.TokenDePruebas }}
+          token: ${{ github.event.inputs.token }}
           ref: ${{ github.event.inputs.branch }}
