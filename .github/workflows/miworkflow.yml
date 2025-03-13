@@ -1,0 +1,14 @@
+name: Mi Workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ejecuta mi acción
+        uses: ./mi-action
+        with:
+          parametro1: 'valor1'
+          parametro2: 'valor2'
