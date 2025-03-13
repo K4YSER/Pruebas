@@ -37,10 +37,10 @@ jobs:
         env:
         ##### CAMBIAR 'Se ha detectado un error en el código' por el mensaje que quieres que salga en el correo #####
         ##### CAMBIAR CONTRASENA_CORREO por la contraseña real del correo de Remitente #####
-          CORREO_REMITENTE: jefedeplanta@empresa.com
-          CORREO_DESTINATARIO1: empleado1@empresa.com
-          CORREO_DESTINATARIO2: empleado2@empresa.com
-          CORREO_DESTINATARIO3: empleado3@empresa.com
-          CONTRASENA_CORREO: TU_CONTRASEÑA_DE_CORREO
+          CORREO_REMITENTE: josemaria.gonzalez@viewnext.com
+          CORREO_DESTINATARIO1: josemaria.gonzalez@viewnext.com
+        #####  CORREO_DESTINATARIO2: empleado2@empresa.com
+        #####  CORREO_DESTINATARIO3: empleado3@empresa.com
+          CONTRASENA_CORREO: 2024-Abril-Primavera4
         run: |
           python -c "import smtplib; import email.mime.text; msg = email.mime.text.MIMEText('Se ha detectado un error en el código'); msg['Subject'] = 'Error en el código'; msg['From'] = 'jefedeplanta@empresa.com'; msg['To'] = 'empleado1@empresa.com, empleado2@empresa.com, empleado3@empresa.com'; server = smtplib.SMTP('smtp.gmail.com', 587); server.starttls(); server.login('jefedeplanta@empresa.com', 'TU_CONTRASEÑA_DE_CORREO'); server.sendmail('jefedeplanta@empresa.com', ['empleado1@empresa.com', 'empleado2@empresa.com', 'empleado3@empresa.com'], msg.as_string()); server.quit()"
