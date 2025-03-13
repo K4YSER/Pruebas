@@ -1,13 +1,8 @@
-name: Análisis de código
-
 on:
   workflow_dispatch:
     inputs:
       repo:
         description: 'Repositorio a analizar'
-        required: true
-      token:
-        description: 'Token de acceso al repositorio'
         required: true
       branch:
         description: 'Rama del repositorio a analizar'
@@ -21,11 +16,5 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ github.event.inputs.repo }}
-          token: ${{ github.event.inputs.token }}
+          token: ${{ secrets.TokenDePruebas }}
           ref: ${{ github.event.inputs.branch }}
-
-      - name: Análisis del código
-        run: |
-          # Aquí puedes agregar los comandos para analizar el código
-          # Por ejemplo, puedes utilizar herramientas como eslint, sonarqube, etc.
-          echo "Análisis del código en ${{ github.event.inputs.repo }}/${{ github.event.inputs.branch }}"
