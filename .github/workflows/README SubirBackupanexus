@@ -1,3 +1,8 @@
 El usuario pasa una dirección de servidor de Nexus, usuario y contraseña para
 
 clonar el repositorio y subir la copia en el servidor de Nexus
+
+Servidor ( https://nexus.servidor.com )
+usuario ( nombredeusuarionexus )
+password ( contraseñadelusuarionexus )
+ruta de ejemplo: ( /var/www/geoserver/data/ )
