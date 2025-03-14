@@ -1,19 +1,6 @@
 name: Subir Backup a Nexus
 on:
   workflow_dispatch:
-    inputs:
-      servidor:
-        description: Servidor de Nexus
-        required: true
-      usuario:
-        description: Usuario del servidor
-        required: true
-      password:
-        description: Contraseña del servidor
-        required: true
-      ruta:
-        description: Ruta de destino en el servidor
-        required: true
 jobs:
   copiar-repositorio:
     runs-on: ubuntu-latest
@@ -27,9 +14,9 @@ jobs:
       - name: Subir copia al servidor
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ github.event.inputs.servidor }}
-          username: ${{ github.event.inputs.usuario }}
-          password: ${{ github.event.inputs.password }}
+          host: ${{ secrets.SERVIDORNEXUS }}
+          username: ${{ secrets.USUARIONEXUS }}
+          password: ${{ secrets.PASSWORDUSUARIONEXUS }}
           script: |
-            mkdir -p ${{ github.event.inputs.ruta }}
-            cp -r /github/workspace/copia/* ${{ github.event.inputs.ruta }}/
+            mkdir -p /ruta/de/destino/
+            cp -r /github/workspace/copia/* /ruta/de/destino/
