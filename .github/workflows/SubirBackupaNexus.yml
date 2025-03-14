@@ -1,5 +1,5 @@
 # .github/workflows/copiar-repositorio.yml
-name: Copiar repositorio
+name: Subir Backup a Nexus
 on:
   workflow_dispatch:
     inputs:
