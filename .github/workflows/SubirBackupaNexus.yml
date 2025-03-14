@@ -1,0 +1,33 @@
+# .github/workflows/copiar-repositorio.yml
+name: Copiar repositorio
+on:
+  workflow_dispatch:
+    inputs:
+      servidor:
+        description: Servidor de nexus
+        required: true
+      usuario:
+        description: Usuario del servidor
+        required: true
+      password:
+        description: Contraseña del servidor
+        required: true
+  push:
+    branches:
+      - main
+jobs:
+  copiar-repositorio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v2
+      - name: Crear copia del repositorio
+        run: |
+          mkdir copia
+          cp -r . copia
+      - name: Subir copia al servidor
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ github.event.inputs.servidor }}
+          username: ${{ github.event.inputs.usuario }}
+          password: ${{ github.event.inputs.password }}
