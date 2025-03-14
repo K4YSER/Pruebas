@@ -1,10 +1,9 @@
-# .github/workflows/copiar-repositorio.yml
 name: Subir Backup a Nexus
 on:
   workflow_dispatch:
     inputs:
       servidor:
-        description: Servidor de nexus
+        description: Servidor de Nexus
         required: true
       usuario:
         description: Usuario del servidor
@@ -12,9 +11,9 @@ on:
       password:
         description: Contraseña del servidor
         required: true
-  push:
-    branches:
-      - main
+      ruta:
+        description: Ruta de destino en el servidor
+        required: true
 jobs:
   copiar-repositorio:
     runs-on: ubuntu-latest
@@ -31,3 +30,6 @@ jobs:
           host: ${{ github.event.inputs.servidor }}
           username: ${{ github.event.inputs.usuario }}
           password: ${{ github.event.inputs.password }}
+          script: |
+            mkdir -p ${{ github.event.inputs.ruta }}
+            cp -r /github/workspace/copia/* ${{ github.event.inputs.ruta }}/
