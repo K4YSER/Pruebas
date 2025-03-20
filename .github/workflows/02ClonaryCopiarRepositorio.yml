@@ -8,25 +8,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.TOKENDEPRUEBAS }}
 
       - name: Clonar repositorio completo
         run: |
-          git clone --mirror ${{ secrets.REPOSITORIOGITHUB }} repo-mirror
-          cd repo-mirror
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git clone --mirror . repo-mirror
 
       - name: Comprimir repositorio
         run: |
-          cd ..
-          tar -czf repo-mirror.tar.gz repo-mirror
+          cd repo-mirror
+          zip -r ../ClonadoRepositorio.zip .
 
       - name: Subir artefacto
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
-          name: repo-mirror.tar.gz
-          path: repo-mirror.tar.gz
+          name: ClonadoRepositorio.zip
+          path: ClonadoRepositorio.zip
