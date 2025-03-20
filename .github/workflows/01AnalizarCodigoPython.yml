@@ -22,3 +22,5 @@ jobs:
           else
             echo "Error en el código"
           fi
+
+# Analiza todos los archivos python de la raíz del proyecto en busca de errores
