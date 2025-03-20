@@ -1,7 +1,0 @@
-Hace un analisis de código del repositorio, incluido todos los archivos con Python del repositorio
-
-Esta GH Action se lanza de forma manual, nos pedirá 3 parámetros:
-
-- Repositorio donde vayamos a analizar el código ( https://github.com/USUARIO/NOMBREDELREPOSITORIO )
-- Token o el contenido de este para la autenticación del repositorio ( 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 )
-- Rama del repositorio donde se vaya a hacer el analisis de código ( main )

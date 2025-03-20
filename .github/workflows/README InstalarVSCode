@@ -1,5 +1,0 @@
-Esta GH Action , usando Matrices, instala Visual Studio Code en un sistema Ubuntu, usando NODEJS, tanto la version
-
-14 como la 16, haciendo uso de la Matriz creada en el mismo código. Una vez terminada, hace una comprobación de que está, ejecutando el comando para comprobar
-
-la versión instalada de VSCode
