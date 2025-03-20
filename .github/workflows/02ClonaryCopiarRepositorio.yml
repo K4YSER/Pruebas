@@ -26,7 +26,7 @@ jobs:
           tar -czf repo-mirror.tar.gz repo-mirror
 
       - name: Subir artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: repo-mirror.tar.gz
           path: repo-mirror.tar.gz
