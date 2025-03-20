@@ -1,0 +1,23 @@
+name: Analizar código Python
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Instalar pylint
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+      - name: Analizar código
+        run: |
+          pylint $(find . -maxdepth 1 -name "*.py")
+          if [ $? -eq 0 ]; then
+            echo "TODO OK"
+          else
+            echo "Se encontraron errores en el código"
+          fi
