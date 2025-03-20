@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Clonar repositorio completo
         run: |
@@ -20,7 +20,7 @@ jobs:
           zip -r ../ClonadoRepositorio.zip .
 
       - name: Subir artefacto
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ClonadoRepositorio.zip
           path: ClonadoRepositorio.zip
