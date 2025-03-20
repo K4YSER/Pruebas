@@ -11,11 +11,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TokenDePruebas }}
 
       - name: Clonar repositorio completo
         run: |
-          git clone --mirror https://github.com/${GITHUB_REPOSITORY}.git repo-mirror
+          git clone --mirror ${{ secrets.REPOSITORIOGITHUB }} repo-mirror
           cd repo-mirror
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
