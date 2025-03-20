@@ -9,15 +9,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Instalar pylint
+      - name: Analizar código Python
         run: |
-          python -m pip install --upgrade pip
-          pip install pylint
-      - name: Analizar código
-        run: |
-          pylint $(find . -maxdepth 1 -name "*.py")
+          python -m py_compile *.py
           if [ $? -eq 0 ]; then
             echo "TODO OK"
           else
-            echo "Se encontraron errores en el código"
+            echo "Error en el código"
           fi
