@@ -1,0 +1,32 @@
+name: Crear Copia del Repositorio
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clonar-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clonar repositorio completo
+        run: |
+          git clone --mirror https://github.com/${GITHUB_REPOSITORY}.git repo-mirror
+          cd repo-mirror
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Comprimir repositorio
+        run: |
+          cd ..
+          tar -czf repo-mirror.tar.gz repo-mirror
+
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: repo-mirror.tar.gz
+          path: repo-mirror.tar.gz
