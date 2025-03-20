@@ -8,13 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v2
 
       - name: Clonar repositorio completo
         run: |
-          git clone --mirror . repo-mirror
+          git clone --mirror https://github.com/${GITHUB_REPOSITORY}.git repo-mirror
 
       - name: Comprimir repositorio
         run: |
@@ -22,7 +20,7 @@ jobs:
           zip -r ../ClonadoRepositorio.zip .
 
       - name: Subir artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: ClonadoRepositorio.zip
           path: ClonadoRepositorio.zip
