@@ -1,0 +1,24 @@
+name: Analizar código
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Analizar Python
+        run: |
+          pip install pylint
+          pylint --recursive .
+      - name: Analizar Java
+        run: |
+          javac --version
+          checkstyle --version
+          checkstyle .
+      - name: Analizar JavaScript
+        run: |
+          npm install eslint
+          eslint .
