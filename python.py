@@ -1,5 +1,5 @@
-numero1 = 5
-numero2 = 2
+NUMERO1 = 5
+NUMERO2 = 2
 
-print(numero1, '+', numero2, '= 7')
-print(numero1 > numero2 and numero1==5)
+print(NUMERO1, '+', NUMERO2, '= 7')
+print(NUMERO1 > NUMERO2 and NUMERO1==5)
