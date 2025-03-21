@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Instalar herramientas de análisis
         run: |
-          sudo -su
+          sudo apt update
           sudo pip install pylint
           sudo npm install eslint
           sudo apt-get update && apt-get install -y default-jdk
