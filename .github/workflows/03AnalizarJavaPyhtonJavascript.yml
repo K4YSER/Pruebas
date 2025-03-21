@@ -4,31 +4,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  analizar:
+  analyze:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Instalar pylint
+      - name: Instalar herramientas de análisis
         run: |
           pip install pylint
+          npm install -g eslint
+          sudo apt-get update && sudo apt-get install -y default-jdk
 
       - name: Analizar código Python
         run: |
-          pylint --recursive=yes --exit-zero $(find . -name "*.py")
-
-      - name: Instalar javac
-        run: |
-          sudo apt-get update && sudo apt-get install -y default-jdk
+          pylint $(find . -name "*.py")
 
       - name: Analizar código Java
         run: |
           javac $(find . -name "*.java")
-
-      - name: Instalar eslint
-        run: |
-          npm install eslint
 
       - name: Analizar código JavaScript
         run: |
