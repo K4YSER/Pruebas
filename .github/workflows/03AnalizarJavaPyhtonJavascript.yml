@@ -1,4 +1,4 @@
-name: Analizar código
+name: AnalizarJavaPyhtonJavascript
 
 on:
   workflow_dispatch:
