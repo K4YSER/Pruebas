@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Instalar herramientas de análisis
         run: |
-          pip install pylint
-          npm install eslint
-          apt-get update && apt-get install -y default-jdk
+          sudo pip install pylint
+          sudo npm install eslint
+          sudo apt-get update && apt-get install -y default-jdk
 
       - name: Analizar código Python
         run: |
