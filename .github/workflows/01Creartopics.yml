@@ -1,40 +1,40 @@
-name: Añadir Topics a un Repositorio
+name: Agregar topic a repositorio
 
 on:
   workflow_dispatch:
     inputs:
-      repo-url:
-        description: 'Nombre del repositorio (ejemplo: usuario/repositorio)'
+      repo-name:
+        description: 'Nombre del repositorio'
         required: true
-        type: string
-      topics:
-        description: 'Lista de topics separados por comas (ejemplo: topic1, topic2)'
+      topic-name:
+        description: 'Nombre del topic'
         required: true
-        type: string
 
 jobs:
-  add-topics:
+  agregar-topic:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Verificar el repositorio y los topics
+      - name: Obtener ID del repositorio
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKENDEACCESO }}
+          REPO_NAME: ${{ github.event.inputs.repo-name }}
+          TOPIC_NAME: ${{ github.event.inputs.topic-name }}
         run: |
-          echo "Repositorio: ${{ github.event.inputs.repo-url }}"
-          echo "Topics: ${{ github.event.inputs.topics }}"
+          REPO_ID=$(curl -X GET \
+          https://api.github.com/repos/${REPO_NAME} \
+          -H 'Authorization: Bearer ${GITHUB_TOKEN}' \
+          -H 'Content-Type: application/json' \
+          | jq -r '.id')
+          echo "REPO_ID=$REPO_ID" >> $GITHUB_ENV
 
-      - name: Configurar git y autenticar
+      - name: Agregar topic al repositorio
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKENDEACCESO }}
+          REPO_ID: ${{ env.REPO_ID }}
+          TOPIC_NAME: ${{ github.event.inputs.topic-name }}
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-
-      - name: Añadir Topics al Repositorio
-        run: |
-          REPO="${{ github.event.inputs.repo-url }}"
-          TOPICS="${{ github.event.inputs.topics }}"
-          # Convertir los topics de una cadena separada por comas a un array
-          TOPICS_ARRAY=$(echo "$TOPICS" | tr "," "\n" | jq -R . | jq -s .)
-          
-          # Usar la API de GitHub para actualizar los topics
-          curl -X PUT -H "Authorization: token ${{ secrets.TOKENDEACCESO }}" \
-               -d "{\"names\": $TOPICS_ARRAY}" \
-               "https://api.github.com/repos/$REPO/topics"
+          curl -X PUT \
+          https://api.github.com/repos/${REPO_ID}/topics \
+          -H 'Authorization: Bearer ${GITHUB_TOKEN}' \
+          -H 'Content-Type: application/json' \
+          -d '{"names": ["${TOPIC_NAME}"]}'
