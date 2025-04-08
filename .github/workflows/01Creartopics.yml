@@ -3,11 +3,14 @@ name: Agregar topics a un repositorio
 on:
   workflow_dispatch:
     inputs:
-      repo-name:
+      repository:
         description: 'Nombre del repositorio'
         required: true
       topics:
         description: 'Topics a agregar (separados por comas)'
+        required: true
+      owner:
+        description: 'Dueño del repositorio'
         required: true
 
 jobs:
@@ -15,12 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Agregar topics al repositorio
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.repos.updateTopics({
-              owner: github.context.repo.owner,
-              repo: github.context.inputs.repo-name,
-              names: github.context.inputs.topics.split(',')
-            })
+        run: |
+          curl -X PATCH \
+          https://api.github.com/repos/${owner}/${repository}/topics \
+          -H 'Content-Type: application/json' \
+          -H 'Accept: application/vnd.github.mercy-preview+json' \
+          -d '{"names": ["${topics}"]}'
+        env:
+          owner: ${{ github.event.inputs.owner }}
+          repository: ${{ github.event.inputs.repository }}
+          topics: ${{ github.event.inputs.topics }}
