@@ -1,27 +1,24 @@
-name: Añadir topics a un repositorio
+name: Añadir Topics a un Repositorio
 
 on:
   workflow_dispatch:
     inputs:
-      repository:
-        description: Nombre del repositorio
+      repo-url:
+        description: 'URL del repositorio'
         required: true
+        type: string
       topics:
-        description: Topics a añadir (separados por comas)
+        description: 'Lista de topics separados por comas'
         required: true
+        type: string
 
 jobs:
   add-topics:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Añadir topics al repositorio
-        uses: actions/github-script@v6
-        with:
-          script: |
-            curl -X PATCH \
-              https://api.github.com/repos/${GITHUB_REPOSITORY}/topics \
-              -H 'Content-Type: application/json' \
-              -d '{"names": ["${TOPICS}"]}'
-        env:
-          GITHUB_REPOSITORY: ${{ github.event.inputs.repository }}
-          TOPICS: ${{ github.event.inputs.topics }}
+      - name: Verificar el repositorio y los topics
+        run: |
+          echo "Repositorio: ${{ github.event.inputs.repo-url }}"
+          echo "Topics: ${{ github.event.inputs.topics }}"
+
