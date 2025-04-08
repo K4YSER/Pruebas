@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       repo-url:
-        description: 'URL del repositorio'
+        description: 'Nombre del repositorio (ejemplo: usuario/repositorio)'
         required: true
         type: string
       topics:
-        description: 'Lista de topics separados por comas'
+        description: 'Lista de topics separados por comas (ejemplo: topic1, topic2)'
         required: true
         type: string
 
@@ -22,3 +22,19 @@ jobs:
           echo "Repositorio: ${{ github.event.inputs.repo-url }}"
           echo "Topics: ${{ github.event.inputs.topics }}"
 
+      - name: Configurar git y autenticar
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Añadir Topics al Repositorio
+        run: |
+          REPO="${{ github.event.inputs.repo-url }}"
+          TOPICS="${{ github.event.inputs.topics }}"
+          # Convertir los topics de una cadena separada por comas a un array
+          TOPICS_ARRAY=$(echo "$TOPICS" | tr "," "\n" | jq -R . | jq -s .)
+          
+          # Usar la API de GitHub para actualizar los topics
+          curl -X PUT -H "Authorization: token ${{ secrets.TOKENDEPRUEBAS }}" \
+               -d "{\"names\": $TOPICS_ARRAY}" \
+               "https://api.github.com/repos/$REPO/topics"
