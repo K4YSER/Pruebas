@@ -35,6 +35,6 @@ jobs:
           TOPICS_ARRAY=$(echo "$TOPICS" | tr "," "\n" | jq -R . | jq -s .)
           
           # Usar la API de GitHub para actualizar los topics
-          curl -X PUT -H "Authorization: token ${{ secrets.TOKENDEPRUEBAS }}" \
+          curl -X PUT -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                -d "{\"names\": $TOPICS_ARRAY}" \
                "https://api.github.com/repos/$REPO/topics"
