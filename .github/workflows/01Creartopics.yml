@@ -1,5 +1,4 @@
 name: Add topics to repository
-
 on:
   workflow_dispatch:
     inputs:
@@ -9,7 +8,6 @@ on:
       topics:
         description: 'Lista de topics separados por comas'
         required: true
-
 jobs:
   add-topics:
     runs-on: ubuntu-latest
@@ -23,7 +21,7 @@ jobs:
           TOPICS: ${{ github.event.inputs.topics }}
         run: |
           curl -X PATCH \
-          https://api.github.com/repos/${REPOSITORY}/topics \
-          -H 'Authorization: Bearer ${REPOSITORY_GITHUB}' \
+          https://api.github.com/repos/${GITHUB_REPOSITORY}/topics \
+          -H 'Authorization: Bearer $GITHUB_TOKEN' \
           -H 'Content-Type: application/json' \
           -d '{"names": ["${TOPICS}"]}'
