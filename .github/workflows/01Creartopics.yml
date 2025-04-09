@@ -16,12 +16,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Add topics
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKENDEACCESO }}
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_GITHUB }}
           REPOSITORY: ${{ github.event.inputs.repository }}
           TOPICS: ${{ github.event.inputs.topics }}
         run: |
           curl -X PATCH \
           https://api.github.com/repos/${GITHUB_REPOSITORY}/topics \
-          -H 'Authorization: Bearer $GITHUB_TOKEN' \
+          -H 'Authorization: Bearer $TOKENDEACCESO' \
           -H 'Content-Type: application/json' \
           -d '{"names": ["${TOPICS}"]}'
