@@ -21,7 +21,7 @@ jobs:
           TOPICS: ${{ github.event.inputs.topics }}
         run: |
           curl -X PATCH \
-          https://api.github.com/repos/${GITHUB_REPOSITORY}/topics \
+          https://api.github.com/repos/${REPOSITORIOGITHUB}/topics \
           -H 'Authorization: Bearer $GITHUB_TOKEN' \
           -H 'Content-Type: application/json' \
           -d '{"names": ["${TOPICS//,/\",\"}"]}'
