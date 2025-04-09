@@ -20,8 +20,8 @@ jobs:
           REPOSITORY: ${{ github.event.inputs.repository }}
           TOPICS: ${{ github.event.inputs.topics }}
         run: |
-          curl -X PATCH \
-          https://api.github.com/repos/K4YSER/Pruebas \
+          curl -X PUT \
+          https://api.github.com/repos/${GITHUB_REPOSITORY}/topics \
           -H 'Authorization: Bearer $GITHUB_TOKEN' \
           -H 'Content-Type: application/json' \
           -d '{"names": ["${TOPICS//,/\",\"}"]}'
