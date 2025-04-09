@@ -20,8 +20,10 @@ jobs:
           REPOSITORY: ${{ github.event.inputs.repository }}
           TOPICS: ${{ github.event.inputs.topics }}
         run: |
-          curl -X PUT \
-          https://api.github.com/repos/${GITHUB_REPOSITORY}/topics \
-          -H 'Authorization: Bearer ${{ secrets.TOKENDEACCESO }}' \
-          -H 'Content-Type: application/json' \
-          -d '{"names": ["${TOPICS//,/\",\"}"]}'
+          echo "Repositorio objetivo: $REPOSITORY"
+          echo "Topics a aplicar: $TOPICS"
+ 
+          curl -X PUT "https://api.github.com/repos/${REPOSITORY}/topics" \
+          -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+          -H "Content-Type: application/json" \
+          -d "{\"names\": [\"${TOPICS//,/\",\"}\"]}"
