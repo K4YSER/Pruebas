@@ -22,7 +22,7 @@ jobs:
           echo "Repositorio objetivo: $REPOSITORY"
           echo "Topics a aplicar: $TOPICS"
  
-          curl -X PATCH "https://api.github.com/repos/${REPOSITORY}/topics" \
+          curl -X PUT "https://api.github.com/repos/${REPOSITORY}/topics" \
           -H "Authorization: Bearer ${{ secrets.TOKENDEACCESO }}" \
           -H "Accept: application/vnd.github.mercy-preview+json" \
           -H "Content-Type: application/json" \
