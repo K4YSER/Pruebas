@@ -22,6 +22,6 @@ jobs:
         run: |
           curl -X PUT \
           https://api.github.com/repos/${GITHUB_REPOSITORY}/topics \
-          -H 'Authorization: Bearer $GITHUB_TOKEN' \
+          -H 'Authorization: Bearer ${{ secrets.TOKENDEACCESO }}' \
           -H 'Content-Type: application/json' \
           -d '{"names": ["${TOPICS//,/\",\"}"]}'
