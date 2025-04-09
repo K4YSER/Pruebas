@@ -1,40 +1,29 @@
-name: Agregar topic a repositorio
+name: Add topics to repository
 
 on:
   workflow_dispatch:
     inputs:
-      repo-name:
+      repository:
         description: 'Nombre del repositorio'
         required: true
-      topic-name:
-        description: 'Nombre del topic'
+      topics:
+        description: 'Lista de topics separados por comas'
         required: true
 
 jobs:
-  agregar-topic:
+  add-topics:
     runs-on: ubuntu-latest
     steps:
-      - name: Obtener ID del repositorio
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Add topics
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKENDEACCESO }}
-          REPO_NAME: ${{ github.event.inputs.repo-name }}
-          TOPIC_NAME: ${{ github.event.inputs.topic-name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.event.inputs.repository }}
+          TOPICS: ${{ github.event.inputs.topics }}
         run: |
-          REPO_ID=$(curl -X GET \
-          https://api.github.com/repos/${REPO_NAME} \
-          -H 'Authorization: Bearer ${GITHUB_TOKEN}' \
+          curl -X PATCH \
+          https://api.github.com/repos/${REPOSITORY}/topics \
+          -H 'Authorization: Bearer ${REPOSITORY_GITHUB}' \
           -H 'Content-Type: application/json' \
-          | jq -r '.id')
-          echo "REPO_ID=$REPO_ID" >> $GITHUB_ENV
-
-      - name: Agregar topic al repositorio
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKENDEACCESO }}
-          REPO_ID: ${{ env.REPO_ID }}
-          TOPIC_NAME: ${{ github.event.inputs.topic-name }}
-        run: |
-          curl -X PUT \
-          https://api.github.com/repos/${REPO_ID}/topics \
-          -H 'Authorization: Bearer ${GITHUB_TOKEN}' \
-          -H 'Content-Type: application/json' \
-          -d '{"names": ["${TOPIC_NAME}"]}'
+          -d '{"names": ["${TOPICS}"]}'
