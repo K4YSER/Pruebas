@@ -24,6 +24,6 @@ jobs:
           echo "Topics a aplicar: $TOPICS"
  
           curl -X PUT "https://api.github.com/repos/${REPOSITORY}/topics" \
-          -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+          -H "Authorization: Bearer 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" \
           -H "Content-Type: application/json" \
           -d "{\"names\": [\"${TOPICS//,/\",\"}\"]}"
